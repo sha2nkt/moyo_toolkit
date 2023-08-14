@@ -1,12 +1,31 @@
-# MOYO
+## MOYO 🧘🏻‍♀️: A dataset containing complex yoga poses, multi-view videos, SMPL-X meshes, pressure and body center of mass
 
+<p align="center">
+    <img src="moyo/docs/moyo_logo_transparent_cropped.png" alt="Image" width="450
+" height="100" />
+</p>
 
+[ [Project Page](https://ipman.is.tue.mpg.de) ][ [MOYO Dataset](https://moyo.is.tue.mpg.de) ][ [Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Tripathi_3D_Human_Pose_Estimation_via_Intuitive_Physics_CVPR_2023_paper.pdf) ][ [Video](https://www.youtube.com/watch?v=eZTtLUMnGIg) ] [[Register MoYo Account]](https://moyo.is.tue.mpg.de/register.php)
+
+<p align="center">    
+    <img src="moyo/docs/moyo_offer-crop.png" alt="Image" width="80%"/>
+</p>
+
+This is a repository for download, preprocessing, visualizing, running evaluations on the MOYO dataset.
+
+Our dataset contains is more
+challenging than existing 3D HPS datasets; it has extreme poses, strong self-occlusion, and
+significant body-ground and self-contact. 
+
+<p align="center">
+    <img src="moyo/docs/montage_broad.jpg" alt="Image" width="100%"/>
+</p>
 
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!`
 
 ## Add your files
 
