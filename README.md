@@ -1,8 +1,7 @@
 ## MOYO 🧘🏻‍♀️: A dataset containing complex yoga poses, multi-view videos, SMPL-X meshes, pressure and body center of mass
 
-<p align="center">
-    <img src="moyo/docs/moyo_logo_transparent_cropped.png" alt="Image" width="450
-" height="100" />
+<p align="center"> 
+    <img src="moyo/docs/moyo_logo_transparent_cropped.png" alt="Image" width="70%"/>
 </p>
 
 [ [Project Page](https://ipman.is.tue.mpg.de) ][ [MOYO Dataset](https://moyo.is.tue.mpg.de) ][ [Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Tripathi_3D_Human_Pose_Estimation_via_Intuitive_Physics_CVPR_2023_paper.pdf) ][ [Video](https://www.youtube.com/watch?v=eZTtLUMnGIg) ] [[Register MoYo Account]](https://moyo.is.tue.mpg.de/register.php)
