@@ -7,6 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+loguru = "^0.7.0"
+clint = "^0.5.1"
 
 
 [build-system]
