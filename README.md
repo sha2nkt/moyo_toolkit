@@ -27,6 +27,46 @@ Get a copy of the code:
 git clone https://github.com/sha2nkt/moyo.git
 ```
 
+General Requirements:
+
+- Python 3.9
+
+[//]: # (- torch 1.13.0)
+[//]: # (- CUDA 11.6 &#40;check `nvcc --version`&#41;)
+[//]: # (- pytorch3d 0.7.3)
+Install the environment:
+
+```bash
+ENV_NAME=moyo_p39
+conda create -n $ENV_NAME python=3.9
+conda activate $ENV_NAME
+pip install .
+```
+
+### Downloading the dataset
+
+MOYO provides the following data:
+- `arctic_data/data/images [649G]`: Full 2K-resolution images
+- TODO
+- TODO
+
+⚠️ Register accounts on [MOYO](https://moyo.is.tue.mpg.de/register.php), and then use your username and password when prompted.
+
+The following command downloads the full dataset to `./data/` minus the images and unzips them (-u flag).
+```bash
+bash ./moyo/bash/download_moyo.sh -o ./data/ -u
+```
+
+If you additionally want to download the images, you can run the following command:
+```bash
+bash ./moyo/bash/download_moyo.sh -o ./data/ -u -i
+```
+
+The following command downloads the full dataset to `./data/` (including images), unzips the downloaded zips and deletes the zip files to save space. This will take a while but will give you a fully usable dataset.
+```bash 
+bash ./moyo/bash/download_moyo.sh -o ./data/ -u -i -d
+```
+
 ### Citation
 If you found this code helpful, please consider citing our work:
 
