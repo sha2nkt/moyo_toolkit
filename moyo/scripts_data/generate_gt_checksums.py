@@ -1,5 +1,3 @@
-# Usage: python moyo/scripts_data/generate_gt_checksums.py --data_dir data
-
 import argparse
 import glob
 import hashlib

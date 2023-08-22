@@ -20,6 +20,8 @@ def download(url_files_dict, post_data):
     # Download urls
     logger.warning(
         f"Note: Download Images? = {args.download_images}. To get images, rerun with -i flag in the bash script")
+    session = requests.Session()
+
     for url_tag, url_file in url_files_dict.items():
         if not op.exists(url_file):
             raise FileNotFoundError(f"File {url_file} not found")
@@ -38,9 +40,15 @@ def download(url_files_dict, post_data):
 
         pbar = tqdm(urls)
         for url in pbar:
-            pbar.set_description(f"Downloading {url[-40:]}")
+            # Get the filename from the URL
+            filepath = url.split("=")[-1]
+            if op.exists(op.join(args.out_dir, filepath)):
+                logger.info(f"File {filepath} already exists. Skipping...")
+                continue
+
+            pbar.set_description(f"Downloading {url}")
             # Make a POST request with the username and password
-            response = requests.post(
+            response = session.post(
                 url,
                 data=post_data,
                 stream=True,
@@ -54,8 +62,6 @@ def download(url_files_dict, post_data):
                 )
                 sys.exit(1)
 
-            # Get the filename from the URL
-            filepath = url.split("=")[-1]
 
             # Write the contents of the response to a file
             out_p = op.join(args.out_dir, filepath)
@@ -63,8 +69,8 @@ def download(url_files_dict, post_data):
             total_length = int(response.headers.get("content-length"))
             with open(out_p, "wb") as f:
                 for chunk in progress.bar(
-                        response.iter_content(chunk_size=1024),
-                        expected_size=(total_length / 1024) + 1,
+                        response.iter_content(chunk_size=1024*1024*100),
+                        expected_size=(total_length / (1024*1024*100)) + 1,
                 ):
                     if chunk:
                         f.write(chunk)
@@ -197,7 +203,7 @@ def download_data(args):
     # Download urls
     download(url_files_dict, post_data)
     # Verify checksums
-    # verify_checksum(args.out_dir)
+    verify_checksum(args.out_dir)
 
     # Unzip files
     if args.unzip == "True":
