@@ -1,7 +1,7 @@
 """
 Script to get 2D projects from mosh_fits.
 
-python scripts/ioi_vicon_frame_sync.py --img_folder /is/cluster/fast/stripathi/pycharm_remote/moyo_final/moyo_release/final_release/20220923_20220926_with_hands/images/ --c3d_folder /is/cluster/fast/stripathi/pycharm_remote/moyo_final/moyo_release/final_release/20220923_20220926_with_hands/vicon --cam_folder_first /is/cluster/fast/stripathi/pycharm_remote/moyo_final/moyo_release/final_release/20220923_20220926_with_hands/cameras/20220923/220923_Afternoon_PROCESSED_CAMERA_PARAMS/cameras_param.json --cam_folder_second /is/cluster/fast/stripathi/pycharm_remote/moyo_final/moyo_release/final_release/20220923_20220926_with_hands/cameras/20220926/220926_Morning_PROCESSED_CAMERA_PARAMS/cameras_param.json --output_dir ../data/moyo_images_mocap_projected --frame_offset 1 --split val"""
+python scripts/ioi_vicon_frame_sync.py --img_folder ../data/moyo/20220923_20220926_with_hands/images/ --c3d_folder ../data/moyo/20220923_20220926_with_hands/vicon --cam_folder_first ../data/moyo/20220923_20220926_with_hands/cameras/20220923/220923_Afternoon_PROCESSED_CAMERA_PARAMS/cameras_param.json --cam_folder_second ../data/moyo/20220923_20220926_with_hands/cameras/20220926/220926_Morning_PROCESSED_CAMERA_PARAMS/cameras_param.json --output_dir ../data/moyo_images_mocap_projected --frame_offset 1 --split val"""
 
 import argparse
 import glob
@@ -12,14 +12,12 @@ import os.path as osp
 import cv2
 import ipdb
 import numpy as np
-import smplx
 import torch
 import trimesh
 from ezc3d import c3d as ezc3d
 from tqdm import tqdm
 
 from moyo.utils.constants import frame_select_dict_combined as frame_select_dict
-from moyo.utils.mesh import smplx_breakdown
 from moyo.utils.misc import colors, copy2cpu as c2c
 
 
@@ -29,56 +27,9 @@ class Opt:
         self.tracking = False
         self.showbox = False
 
-def smplx_to_mesh(body_params, frame_num, out_ply, model_folder, model_type='smplx'):
-    with torch.no_grad():
-        device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-        num_betas = 10
-
-        smplx_params = smplx_breakdown(body_params, frame_num, device)
-
-        trans = body_params['trans'][[frame_num]]
-        trans = torch.from_numpy(trans).float().to(device)
-
-        betas = torch.from_numpy(body_params['betas']).float().to(device).unsqueeze(0)
-        betas = betas[None, :, :num_betas]  # only using 10 betas
-        body_model_params = dict(model_path=model_folder,
-                                 model_type=model_type,
-                                 v_template=smplx_params['v_template'],
-                                 # joint_mapper=joint_mapper,
-                                 batch_size=trans.shape[0],
-                                 create_global_orient=True,
-                                 create_body_pose=True,
-                                 create_betas=True,
-                                 num_betas=num_betas,
-                                 create_left_hand_pose=True,
-                                 create_right_hand_pose=True,
-                                 create_expression=True,
-                                 create_jaw_pose=True,
-                                 create_leye_pose=True,
-                                 create_reye_pose=True,
-                                 create_transl=True,
-                                 use_pca=False,
-                                 flat_hand_mean=True,
-                                 dtype=torch.float32)
-
-
-        body_model = smplx.create(**body_model_params).to(device)
-
-        body_model_output = body_model(transl=trans,
-                                       global_orient=smplx_params['global_orient'],
-                                       body_pose=smplx_params['body_pose'],
-                                       left_hand_pose=smplx_params['left_hand_pose'],
-                                       right_hand_pose=smplx_params['right_hand_pose'])
-
-        # pelvis = body_model_output.joints[:, 0]
-        # import ipdb; ipdb.set_trace()
-        # mesh = visualize_mesh(body_model_output, body_model.faces)
-        # mesh.export(out_ply)
-    return body_model_output
 
 def visualize_mesh(bm_output, faces, frame_id=0, display=False):
-    imw, imh=1600, 1600
-
+    imw, imh = 1600, 1600
 
     body_mesh = trimesh.Trimesh(vertices=c2c(bm_output.vertices[frame_id]),
                                 faces=faces,
@@ -93,6 +44,7 @@ def visualize_mesh(bm_output, faces, frame_id=0, display=False):
         show_image(body_image)
 
     return body_mesh
+
 
 def project2d(j3d, cam_params, downsample_factor=1.0):
     """
@@ -119,17 +71,18 @@ def project2d(j3d, cam_params, downsample_factor=1.0):
 
     # cam matrix
     K = torch.tensor([[f, 0, cx],
-                  [0, f, cy],
-                  [0, 0, 1]]).to(j3d.device)
+                      [0, f, cy],
+                      [0, 0, 1]]).to(j3d.device)
 
     Rt = torch.cat([R, t[:, None]], dim=1).to(j3d.device)
 
     # apply extrinsics
     bs = j3d.shape[0]
-    j3d_cam = torch.bmm(Rt[None,:, :].expand(bs, -1, -1), j3d[:, :, None])
+    j3d_cam = torch.bmm(Rt[None, :, :].expand(bs, -1, -1), j3d[:, :, None])
     j2d = torch.bmm(K[None, :].expand(bs, -1, -1), j3d_cam)
     j2d = j2d / j2d[:, [-1]]
     return j2d[:, :-1, :].squeeze()
+
 
 def visualize_on_img(j2d, img_name, out_dir):
     # Visualize the joints
@@ -144,12 +97,11 @@ def visualize_on_img(j2d, img_name, out_dir):
         if np.any(np.isnan(j2d[n, :])):
             continue
         cor_x, cor_y = int(j2d[n, 0]), int(j2d[n, 1])
-        cv2.circle(img, (cor_x, cor_y), 1, (0,255,0), 5)
+        cv2.circle(img, (cor_x, cor_y), 1, (0, 255, 0), 5)
 
     out_img_path = osp.join(out_dir, fname).replace(f'{ext}', '_markers.png')
     cv2.imwrite(out_img_path, img)
     print(f'{out_img_path} is saved')
-
 
 
 def main(img_folder, c3d_folder, model_folder, output_dir, cam_folders, frame_offset, split, downsample_factor):
@@ -164,7 +116,6 @@ def main(img_folder, c3d_folder, model_folder, output_dir, cam_folders, frame_of
     img_pose_folders = os.listdir(img_folder)
     img_pose_folders = [item for item in img_pose_folders if os.path.isdir(os.path.join(img_folder, item))]
 
-
     for i, c3d_name in enumerate(tqdm(c3d_names)):
         print(f'Processing {i}: {c3d_name}')
         # load images, loop through and read smplx and keypoints
@@ -174,15 +125,15 @@ def main(img_folder, c3d_folder, model_folder, output_dir, cam_folders, frame_of
 
         # get soma fit
         try:
-            c3d_path= glob.glob(osp.join(c3d_folder, f'{c3d_name}.c3d'))[0]
+            c3d_path = glob.glob(osp.join(c3d_folder, f'{c3d_name}.c3d'))[0]
         except:
-            print(f'{c3d_folder}/{c3d_name}_stageii.pkl does not exist. SKIPPING!!!' )
+            print(f'{c3d_folder}/{c3d_name}_stageii.pkl does not exist. SKIPPING!!!')
             continue
 
         c3d = ezc3d(c3d_path)
 
-        markers3d = c3d['data']['points'].transpose(2, 1, 0) # Frames x NumPoints x 4 (x,y,z,1) in homogenous coordinates
-
+        markers3d = c3d['data']['points'].transpose(2, 1,
+                                                    0)  # Frames x NumPoints x 4 (x,y,z,1) in homogenous coordinates
 
         try:
             c3d_var = '_'.join(c3d_name.split('_')[5:])
@@ -204,20 +155,20 @@ def main(img_folder, c3d_folder, model_folder, output_dir, cam_folders, frame_of
             for i, dir in enumerate(img_dir):
                 print(f'{i}. {dir}')
             select_idx = int(input())
-            if select_idx > len(img_dir)-1:
+            if select_idx > len(img_dir) - 1:
                 print(f'{select_idx} is out of range. SKIPPING!!!')
                 continue
             img_dir = img_dir[select_idx]
         if len(img_dir) == 1:
             img_dir = img_dir[0]
 
-
         img_dir = osp.join(img_folder, img_dir)
         image_paths = glob.glob(osp.join(img_dir, '*/*.jpg'))
 
         # select a particular image frame
         selected_img_frame = (selected_frame // 2) + frame_offset
-        image_paths = [path for path in image_paths if int(selected_img_frame) == int(osp.splitext(path)[0].split('_')[-1])]
+        image_paths = [path for path in image_paths if
+                       int(selected_img_frame) == int(osp.splitext(path)[0].split('_')[-1])]
 
         # only take Cam_01
         image_paths = [path for path in image_paths if 'Cam_01' in path]
@@ -242,7 +193,7 @@ def main(img_folder, c3d_folder, model_folder, output_dir, cam_folders, frame_of
                 cameras = json.load(fp)
 
             name_splits = img_name.split('_')
-            cam_num = int(name_splits[name_splits.index('Cam')+1])
+            cam_num = int(name_splits[name_splits.index('Cam') + 1])
             cam_id = f'cam_{cam_num}'
 
             cam_params = cameras[cam_id]
@@ -267,11 +218,14 @@ if __name__ == "__main__":
     parser.add_argument('--model_folder', required=False, default='/ps/project/common/smplifyx/models/',
                         help='path to SMPL/SMPL-X model folder')
     parser.add_argument('--output_dir', type=str, help='Path to the output directory')
-    parser.add_argument('--downsample_factor', type=float, default=0.5, help='Downsample factor for the images. Release images are downsampled by 0.5')
-    parser.add_argument('--frame_offset', type=int, help='To get the frame offset, divide the vicon fnum by 2 and add this offset')
+    parser.add_argument('--downsample_factor', type=float, default=0.5,
+                        help='Downsample factor for the images. Release images are downsampled by 0.5')
+    parser.add_argument('--frame_offset', type=int,
+                        help='To get the frame offset, divide the vicon fnum by 2 and add this offset')
 
     args = parser.parse_args()
 
     cam_folders = {'220923': args.cam_folder_first, '220926': args.cam_folder_second}
 
-    main(args.img_folder, args.c3d_folder, args.model_folder, args.output_dir, cam_folders, args.frame_offset, args.split, args.downsample_factor)
+    main(args.img_folder, args.c3d_folder, args.model_folder, args.output_dir, cam_folders, args.frame_offset,
+         args.split, args.downsample_factor)
