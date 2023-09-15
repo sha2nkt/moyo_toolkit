@@ -1,7 +1,6 @@
 """
 Usage
-python tests/biomechanical_evaluations/pressure_map_evaluation.py --img_folder /ps/data/YOGI/YOGI_220923_03596/IOI/20220923_Yogi_capture_PNG_MH/ --pp_folder /is/cluster/scratch/gbecherini/mosh/YOGI_2/YOGI_2_def-vt_type-smplx_grab_yogi_head-corr-no_wt-fingers-15000.0_wt-feet-300.0_wt-head-10000.0_seed-100_OFFSET/220923/03596 --pressure_xml_folder /ps/project/vicondata/ViconDataCaptures/OfficialCaptures/YOGI_2/pressure/220923/xml/ --pressure_csv_folder /ps/project/vicondata/ViconDataCaptures/OfficialCaptures/YOGI_2/pressure/220923/single_csv/YOGI/03596/
-
+python eval/pressure_map_evaluation.py --img_folder ../data/moyo/20220923_20220926_with_hands/images/val/ --pp_folder ../data/moyo/20220923_20220926_with_hands/mosh/val/ --pressure_xml_folder ../data/moyo/20220923_20220926_with_hands/pressure/val/xml --pressure_csv_folder ../data/moyo/20220923_20220926_with_hands/pressure/val/single_csv
 """
 
 import argparse
