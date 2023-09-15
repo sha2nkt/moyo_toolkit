@@ -197,6 +197,7 @@ def download_data(args):
         "image_val_urls": op.join(args.url_dir, "images_val.txt"),
         "com_urls": op.join(args.url_dir, "coms.txt"),
         "pressure_urls": op.join(args.url_dir, "pressures.txt"),
+        "vicon_urls": op.join(args.url_dir, "vicon.txt"),
         "smplx_fits_urls": op.join(args.url_dir, "smplx_fits.txt"),
     }
 
