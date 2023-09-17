@@ -63,6 +63,8 @@ MOYO provides the following data:
     - `20221004_with_com/mosh.zip [1,1G]`: SMPL-X fits with hand markers
     - `20221004_with_com/pressure.zip [517M]`: Pressure mat data
     - `20221004_with_com/coms.md [489M]`: Center of mass data from Vicon plug-in gait
+  
+If you require the corresponding SMPL fits, please feel free to contact us. 
 
 ⚠️ Register accounts on [MOYO](https://moyo.is.tue.mpg.de/register.php), and then use your username and password when
 prompted.
