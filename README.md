@@ -96,11 +96,11 @@ python scripts/ioi_vicon_frame_sync.py --img_folder ../data/moyo/20220923_202209
 ```
 
 <p align="left">    
-    <img src="../moyo/assets/220923_yogi_body_hands_03596_Tree_Pose_or_Vrksasana_-a_YOGI_Cam_01_0190_markers.png" alt="Image" width="40%"/>
+    <img src="assets/220923_yogi_body_hands_03596_Tree_Pose_or_Vrksasana_-a_YOGI_Cam_01_0190_markers.png" alt="Image" width="40%"/>
 </p>
 
 To visualize the exact the pressure mat markers alignment with respect to the subject, we provide a blender file
-in `../moyo/assets/mat_marker_configuration.blend`.
+in `assets/mat_marker_configuration.blend`.
 
 ### Biomechanical Evaluation
 
