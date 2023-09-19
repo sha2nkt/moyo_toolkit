@@ -151,7 +151,7 @@ See [LICENSE](LICENSE).
 
 Constructing the MOYO dataset is a huge effort. The authors deeply thank Tsvetelina Alexiadis, Taylor McConnell, Claudia
 Gallatz, Markus Höschle, Senya Polikovsky, Camilo Mendoza, Yasemin Fincan, Leyre Sanchez and Matvey Safroshkin for data
-collection, Giorgio Becherini for MoSh++, Joachim Tesch and Nikos Athanasiou for visualizations, Zincong Fang, Vasselis
+collection, Giorgio Becherini for MoSh++, Joachim Tesch and Nikos Athanasiou for visualizations, Zicong Fan, Vasselis
 Choutas and all of Perceiving Systems for fruitful discussions. This work was funded by the International Max Planck
 Research School for Intelligent Systems (IMPRS-IS) and in part by the German Federal Ministry of Education and
 Research (BMBF), Tübingen AI Center, FKZ: 01IS18039B.".
