@@ -60,7 +60,7 @@ MOYO provides the following data:
 2. Data with SMPLX without hand markers, but includes both coms and pressure
     - `20221004_with_com/images [635G]`: Full 2K-resolution images
     - `20221004_with_com/cameras.zip [840K]`: Camera parameters for the 8 IOI RGB cameras
-    - `20221004_with_com/mosh.zip [1,1G]`: SMPL-X fits with hand markers
+    - `20221004_with_com/mosh.zip [1,1G]`: SMPL-X fits *without* hand markers
     - `20221004_with_com/pressure.zip [517M]`: Pressure mat data
     - `20221004_with_com/coms.md [489M]`: Center of mass data from Vicon plug-in gait
   
