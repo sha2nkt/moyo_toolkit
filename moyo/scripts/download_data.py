@@ -199,6 +199,7 @@ def download_data(args):
         "pressure_urls": op.join(args.url_dir, "pressures.txt"),
         "vicon_urls": op.join(args.url_dir, "vicon.txt"),
         "smplx_fits_urls": op.join(args.url_dir, "smplx_fits.txt"),
+        "smpl_fits_urls": op.join(args.url_dir, "smpl_fits.txt"),
     }
 
     # Download urls

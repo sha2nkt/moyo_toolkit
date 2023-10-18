@@ -55,16 +55,18 @@ MOYO provides the following data:
     - `20220923_20220926_with_hands/images [741G]`: Full 2K-resolution images
     - `20220923_20220926_with_hands/cameras.zip [1.7M]`: Camera parameters for the 8 IOI RGB cameras
     - `20220923_20220926_with_hands/mosh.zip [1.3G]`: SMPL-X fits with hand markers
+    - `20220923_20220926_with_hands/mosh_smpl.zip [1.3G]`: SMPL fits
     - `20220923_20220926_with_hands/pressure.zip [298M]`: Pressure mat data
     - `20220923_20220926_with_hands/vicon.zip [257M]`: Raw marker data from Vicon
 2. Data with SMPLX without hand markers, but includes both coms and pressure
     - `20221004_with_com/images [635G]`: Full 2K-resolution images
     - `20221004_with_com/cameras.zip [840K]`: Camera parameters for the 8 IOI RGB cameras
     - `20221004_with_com/mosh.zip [1,1G]`: SMPL-X fits *without* hand markers
+    - `20221004_with_com/mosh_smpl.zip [1,1G]`: SMPL fits
     - `20221004_with_com/pressure.zip [517M]`: Pressure mat data
     - `20221004_with_com/coms.md [489M]`: Center of mass data from Vicon plug-in gait
   
-If you require the corresponding SMPL fits, please feel free to contact us. 
+Note: The SMPL fits are obtained from the MOYO SMPL-X fits using the [SMPLX-to-SMPL conversion script](https://github.com/vchoutas/smplx/blob/main/transfer_model/README.md#smpl-x-to-smpl). 
 
 ⚠️ Register accounts on [MOYO](https://moyo.is.tue.mpg.de/register.php), and then use your username and password when
 prompted.
