@@ -25,23 +25,27 @@ DOWNLOAD_IMAGES=False
 UNZIP_FLAG=False
 DELETE_FLAG=False
 
+# Default value for AMASS split, if applicable
+AMASS_SPLIT=""
+
 # Command line arguments
 # take optfolder path from command line
-while getopts "o:iud" opt; do
+while getopts "o:iuda:" opt; do
   case "$opt" in
   o) OUT_DIR="$OPTARG" ;;
   i) DOWNLOAD_IMAGES=True ;;
   u) UNZIP_FLAG=True ;;
   d) DELETE_FLAG=True ;;
+  a) AMASS_SPLIT="$OPTARG" ;;  # Handle AMASS split argument
   esac
 done
 
 echo -e "\nMOYO dataset download script." 1>&2
-echo -e "\nUsage: bash $0 -o <out_folder> [-i] [-u] [-d]" 1>&2
+echo -e "\nUsage: bash $0 -o <out_folder> [-i] [-u] [-d] [-a <amass_split>]" 1>&2
 echo -e "-i: Download full resolution images" 1>&2
 echo -e "-u: Unzip downloaded files" 1>&2
 echo -e "-d: Delete downloaded zip files after unzipping" 1>&2
-
+echo -e "-a: Specify AMASS split type: SMPLH_FEMALE, SMPLH_NEUTRAL, SMPLX_FEMALE, SMPLX_NEUTRAL" 1>&2  # Add explanation for new option
 
 echo -e "\n" 1>&2
 read -p "Enter your MOYO website email address: " USERNAME
@@ -52,12 +56,14 @@ echo -e "\n" 1>&2
 
 echo $OUT_DIR
 echo -e "Download Images: $DOWNLOAD_IMAGES" 1>&2
-python $PWD/moyo/scripts_data/download_data.py --url_dir $PWD/moyo/bash/assets/urls/ \
+python $PWD/moyo/scripts/download_data.py --url_dir $PWD/moyo/bash/assets/urls/ \
                                      --out_dir $OUT_DIR \
                                      --username $USERNAME \
                                      --password $PASSWORD \
                                      --download_images $DOWNLOAD_IMAGES \
                                      --unzip $UNZIP_FLAG \
                                      --delete $DELETE_FLAG \
+                                     --amass_split $AMASS_SPLIT
+
 
 

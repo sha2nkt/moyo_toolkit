@@ -29,6 +29,14 @@ def download(url_files_dict, post_data):
         if args.download_images == "False":
             if "image" in url_tag:
                 continue
+
+        if args.amass_split == "":
+            if "AMASS_" in url_tag:
+                continue
+        else:
+            if "AMASS_"+args.amass_split not in url_tag:
+                continue
+
         # Read the URLs from the file
         with open(url_file, "r") as f:
             urls = f.readlines()
@@ -124,6 +132,14 @@ def unzip(url_files_dict):
             logger.warning("Note: Skipping image download. To get images, rerun with -i flag in the bash script")
             if "image" in url_tag:
                 continue
+
+        if args.amass_split == "":
+            if "AMASS_" in url_tag:
+                continue
+        else:
+            if "AMASS_"+args.amass_split not in url_tag:
+                continue
+
         # Read the URLs from the file
         with open(url_file, "r") as f:
             urls = f.readlines()
@@ -155,6 +171,14 @@ def delete_zip(url_files_dict):
             logger.warning("Note: Skipping image download. To get images, rerun with -i flag in the bash script")
             if "image" in url_tag:
                 continue
+
+        if args.amass_split == "":
+            if "AMASS_" in url_tag:
+                continue
+        else:
+            if "AMASS_"+args.amass_split not in url_tag:
+                continue
+
         # Read the URLs from the file
         with open(url_file, "r") as f:
             urls = f.readlines()
@@ -200,6 +224,10 @@ def download_data(args):
         "vicon_urls": op.join(args.url_dir, "vicon.txt"),
         "smplx_fits_urls": op.join(args.url_dir, "smplx_fits.txt"),
         "smpl_fits_urls": op.join(args.url_dir, "smpl_fits.txt"),
+        "AMASS_SMPLH_FEMALE": op.join(args.url_dir, "amass_smplh_female.txt"),
+        "AMASS_SMPLH_NEUTRAL": op.join(args.url_dir, "amass_smplh_neutral.txt"),
+        "AMASS_SMPLX_FEMALE": op.join(args.url_dir, "amass_smplx_female.txt"),
+        "AMASS_SMPLX_NEUTRAL": op.join(args.url_dir, "amass_smplx_neutral.txt"),
     }
 
     # Download urls
@@ -244,6 +272,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--delete", type=str, help="Whether to delete the downloaded zip files", default="True"
+    )
+    parser.add_argument(
+        "--amass_split", type=str, help="Which AMASS split to download", default=""
     )
 
     args = parser.parse_args()
