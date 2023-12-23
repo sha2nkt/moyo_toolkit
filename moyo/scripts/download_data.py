@@ -129,7 +129,7 @@ def unzip(url_files_dict):
             raise FileNotFoundError(f"File {url_file} not found")
 
         if args.download_images == "False":
-            logger.warning("Note: Skipping image download. To get images, rerun with -i flag in the bash script")
+            # logger.warning("Note: Skipping image download. To get images, rerun with -i flag in the bash script")
             if "image" in url_tag:
                 continue
 
@@ -168,7 +168,7 @@ def delete_zip(url_files_dict):
             raise FileNotFoundError(f"File {url_file} not found")
 
         if args.download_images == "False":
-            logger.warning("Note: Skipping image download. To get images, rerun with -i flag in the bash script")
+            # logger.warning("Note: Skipping image download. To get images, rerun with -i flag in the bash script")
             if "image" in url_tag:
                 continue
 

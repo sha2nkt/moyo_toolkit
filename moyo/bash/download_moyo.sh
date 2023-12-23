@@ -25,9 +25,6 @@ DOWNLOAD_IMAGES=False
 UNZIP_FLAG=False
 DELETE_FLAG=False
 
-# Default value for AMASS split, if applicable
-AMASS_SPLIT=""
-
 # Command line arguments
 # take optfolder path from command line
 while getopts "o:iuda:" opt; do
@@ -56,14 +53,24 @@ echo -e "\n" 1>&2
 
 echo $OUT_DIR
 echo -e "Download Images: $DOWNLOAD_IMAGES" 1>&2
-python $PWD/moyo/scripts/download_data.py --url_dir $PWD/moyo/bash/assets/urls/ \
+if [ -z "$AMASS_SPLIT" ]; then
+  python $PWD/moyo/scripts/download_data.py --url_dir $PWD/moyo/bash/assets/urls/ \
+                                     --out_dir $OUT_DIR \
+                                     --username $USERNAME \
+                                     --password $PASSWORD \
+                                     --download_images $DOWNLOAD_IMAGES \
+                                     --unzip $UNZIP_FLAG \
+                                     --delete $DELETE_FLAG;
+else
+  python $PWD/moyo/scripts/download_data.py --url_dir $PWD/moyo/bash/assets/urls/ \
                                      --out_dir $OUT_DIR \
                                      --username $USERNAME \
                                      --password $PASSWORD \
                                      --download_images $DOWNLOAD_IMAGES \
                                      --unzip $UNZIP_FLAG \
                                      --delete $DELETE_FLAG \
-                                     --amass_split $AMASS_SPLIT
+                                     --amass_split $AMASS_SPLIT;
+fi
 
 
 
