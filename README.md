@@ -7,13 +7,13 @@
 
 [ [Project Page](https://ipman.is.tue.mpg.de) ][ [MOYO Dataset](https://moyo.is.tue.mpg.de) ][ [Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Tripathi_3D_Human_Pose_Estimation_via_Intuitive_Physics_CVPR_2023_paper.pdf) ][ [Video](https://www.youtube.com/watch?v=eZTtLUMnGIg) ][ [Register MoYo Account](https://moyo.is.tue.mpg.de/register.php) ]
 
-## News :triangular_flag_on_post:
-
-- [2023/12/23] AMASS format data released. Please check the [AMASS](#downloading-the-dataset-in-amass-format) section for more details. 
-
 <p align="center">    
     <img src="moyo/docs/moyo_offer-crop.png" alt="Image" width="80%"/>
 </p>
+
+## News :triangular_flag_on_post:
+
+- [2023/12/23] AMASS format data released :confetti_ball:. Please check the [AMASS](#downloading-the-dataset-in-amass-format) section for more details. 
 
 This is a repository for download, preprocessing, visualizing, running evaluations on the MOYO dataset.
 
