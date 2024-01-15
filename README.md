@@ -13,7 +13,7 @@
 
 ## News :triangular_flag_on_post:
 
-- [2023/12/23] AMASS format data released :confetti_ball: (thanks [Giorgio Becherinig](https://ps.is.mpg.de/person/gbecherini)). Please check the [AMASS](#downloading-the-dataset-in-amass-format) section for more details. 
+- [2023/12/23] AMASS format data released :confetti_ball: (thanks [Giorgio Becherini](https://ps.is.mpg.de/person/gbecherini)). Please check the [AMASS](#downloading-the-dataset-in-amass-format) section for more details. 
 
 This is a repository for download, preprocessing, visualizing, running evaluations on the MOYO dataset.
 
