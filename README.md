@@ -13,7 +13,7 @@
 
 ## News :triangular_flag_on_post:
 
-- [2023/12/23] AMASS format data released :confetti_ball: (thanks [Giorgio Becherini](https://ps.is.mpg.de/person/gbecherini)). Please check the [AMASS](#downloading-the-dataset-in-amass-format) section for more details. 
+- [2023/12/23] AMASS format data released :confetti_ball: (thanks [Giorgio Becherini](https://ps.is.mpg.de/person/gbecherini) and [Neelay Shah](https://neelays.github.io/)). Please check the [AMASS](#downloading-the-dataset-in-amass-format) section for more details. 
 
 This is a repository for download, preprocessing, visualizing, running evaluations on the MOYO dataset.
 
@@ -187,7 +187,7 @@ Choutas and all of Perceiving Systems for fruitful discussions. This work was fu
 Research School for Intelligent Systems (IMPRS-IS) and in part by the German Federal Ministry of Education and
 Research (BMBF), Tübingen AI Center, FKZ: 01IS18039B.".
 
-We would also like to extend a special thanks to [Giorgio Becherini](https://ps.is.mpg.de/person/gbecherini) for helping with the release of the AMASS version of the MOYO dataset.  
+We would also like to extend a special thanks to [Giorgio Becherini](https://ps.is.mpg.de/person/gbecherini) and [Neelay Shah](https://neelays.github.io/) for helping with the release of the AMASS version of the MOYO dataset.  
 
 ### Contact
 
