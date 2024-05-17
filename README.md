@@ -119,7 +119,7 @@ bash ./moyo/bash/download_moyo.sh -o ./data/ -u -d -a <AMASS_FORMAT>
 
 Replace the ```<AMASS_FORMAT>``` with the split name you want to download: ```SMPLH_FEMALE```, ```SMPLH_NEUTRAL```, ```SMPLX_FEMALE``` or ```SMPLX_NEUTRAL```.
 
-### Projecting marker on the image
+### Projecting marker/joints on the image
 
 We include a simple script to project vicon markers on the RGB images using the provided camera parameters. A similar
 approach can be used to project the full mesh.
