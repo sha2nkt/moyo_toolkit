@@ -25,10 +25,10 @@ from moyo.utils.constants import CONTACT_THRESH
 from moyo.core.part_volumes import PartVolume
 from pathlib import Path
 
-SMPLX_PART_BOUNDS = '../data/essentials/yogi_segments/smplx/part_meshes_ply/smplx_segments_bounds.pkl'
-FID_TO_PART = '../data/essentials/yogi_segments/smplx/part_meshes_ply/fid_to_part.pkl'
-PART_VID_FID = '../data/essentials/yogi_segments/smplx/part_meshes_ply/smplx_part_vid_fid.pkl'
-HD_SMPLX_MAP  = '../data/essentials/hd_model/smplx/smplx_neutral_hd_sample_from_mesh_out.pkl'
+SMPLX_PART_BOUNDS = './data/essentials/yogi_segments/smplx/part_meshes_ply/smplx_segments_bounds.pkl'
+FID_TO_PART = './data/essentials/yogi_segments/smplx/part_meshes_ply/fid_to_part.pkl'
+PART_VID_FID = './data/essentials/yogi_segments/smplx/part_meshes_ply/smplx_part_vid_fid.pkl'
+HD_SMPLX_MAP  = './data/essentials/hd_model/smplx/smplx_neutral_hd_sample_from_mesh_out.pkl'
 
 class StabilityLossCoS(nn.Module):
     def __init__(self,
