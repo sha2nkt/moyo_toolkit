@@ -1,9 +1,9 @@
 MOYO_V_TEMPLATE = '../data/v_templates/220923_yogi_03596_minimal_simple_female/mesh.ply'
 IOI_PATH = '/is/cluster/scratch/stripathi/pycharm_remote/yogi/data/Yogi-IOI/yoga_dataset_images'
-ESSENTIALS_DIR = '/is/cluster/scratch/stripathi/pycharm_remote/yogi/smplify-xmc-support/data/essentials'
+ESSENTIALS_DIR = '../data/essentials'
 SMPLX_VERT_SEG = '/is/cluster/scratch/stripathi/pycharm_remote/yogi/utils/meshscripts/smplx_vert_segmentation.json'
 SMPL_VERT_SEG = '/is/cluster/scratch/stripathi/pycharm_remote/yogi/utils/meshscripts/smpl_vert_segmentation.json'
-SEGMENTS_DIR = '/is/cluster/scratch/stripathi/pycharm_remote/yogi/smplify-xmc-support/data/essentials/yogi_segments'
+SEGMENTS_DIR = '../data/essentials/yogi_segments'
 
 CONTACT_THRESH = 0.15  # gmof_rho in overlay vis = contact thresh
 
