@@ -138,7 +138,9 @@ in `assets/mat_marker_configuration.blend`.
 ### Biomechanical Evaluation
 
 We provide evaluation scripts to run evaluations fro estimated pressure and com w.r.t groud truth as reported in our
-paper. Since the following scripts use all dataset modalities: video, 3D bodies, pressure and com, they are helpful to anyone wanting to get started with how to use the Moyo data.  
+paper. 
+
+**Since the following scripts use all dataset modalities: video, 3D bodies, pressure and com, they are helpful to anyone wanting to get started with how to use the Moyo data.**  
 
 1. Pressure Evaluation
 
